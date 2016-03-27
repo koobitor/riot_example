@@ -44,6 +44,10 @@ li {
   padding: .2em 0;
 }
 
+.hidden {
+  display: none;
+}
+
 .completed {
   text-decoration: line-through;
   color: #ccc;

@@ -3,11 +3,11 @@
   <h3>{ opts.title }</h3>
 
   <ul>
-    <li each={ item, i in items }>
-      <label class={ completed: done }>
-        <input type="checkbox" checked={ done } onclick={ parent.toggle }> { item.title }
+    <li each={ obj, i in items } class={ hidden: obj.hidden }>
+      <label class={ completed: obj.done }>
+        <input type="checkbox" checked={ obj.done } onclick={ parent.toggle }> { obj.title }
+        <span onclick={ delete }>x</span>
       </label>
-      <span onclick={ delete }>x</span>
     </li>
   </ul>
 
@@ -33,7 +33,7 @@
     }
 
     toggle(e) {
-      var item = e.item
+      var item = e.item.obj
       item.done = !item.done
       return true
     }
@@ -45,7 +45,7 @@
 
       // way 2 [filter] don't know index
       var _items = this.items
-      var _title = e.item.item.title
+      var _title = e.item.obj.title
       var temp = _items.filter(function(i) {
         return i.title != _title
       })
