@@ -3,9 +3,9 @@
   <h3>{ opts.title }</h3>
 
   <ul>
-    <li each={ items }>
+    <li each={ item, i in items }>
       <label class={ completed: done }>
-        <input type="checkbox" checked={ done } onclick={ parent.toggle }> { title }
+        <input type="checkbox" checked={ done } onclick={ parent.toggle }> { item.title }
       </label>
       <span onclick={ delete }>x</span>
     </li>
@@ -44,10 +44,16 @@
       this.items.splice(index, 1)
 
       // way 2 [filter] don't know index
-      var temp = this.items.filter(function(i) {
-        return i.title != e.item.title
+      var _items = this.items
+      var _title = e.item.item.title
+      var temp = _items.filter(function(i) {
+        return i.title != _title
       })
       this.items = temp
+
+      // way 3 [forloop] don't know index
+      for(var i = _items.length-1; i--;)
+        if (_items[i].title === _title) this.items.splice(i, 1)
     }
   </script>
 
